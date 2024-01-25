@@ -45,11 +45,8 @@ export async function run(): Promise<void> {
     //set rox api token environment variable
     process.env.ROX_API_TOKEN = apiToken;
 
-    let roxctl = await io.which("roxctl", false);
-    if (roxctl === "") {
-        core.setFailed(`roxctl not installed, please install roxctl and try again`);
-    }
-    core.debug(`roxctl: ${roxctl}`)
+    const roxctl = "roxctl";
+    core.debug(`Path: $PATH`);
     core.debug(`Runner OS: ${runnerOS}`)
     const imageCheckCmd = [
         "image scan --output json --insecure-skip-tls-verify",
