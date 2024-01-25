@@ -16,5 +16,3 @@ jobs:
           central: ${{ secrets.ROX_CENTRAL }}
           output: table
           output-path: ${{ runner.temp }}
-        env:
-          PATH: "${PATH}:${{ steps.setup-roxctl.outputs.destination }}"
