@@ -7,6 +7,8 @@ import { UploadArtifact } from "./uploadArtifact";
 import { Inputs, Outputs } from "./generated/inputs-outputs";
 import * as fs from "mz/fs";
 import uuidV4 from 'uuid/v4'
+import { FindBinaryStatus } from "./helper";
+import { Installer } from "./installer";
 
 export async function run(): Promise<void> {
     const runnerOS = process.env.RUNNER_OS || process.platform;
@@ -18,7 +20,8 @@ export async function run(): Promise<void> {
     
     let reportExt = ""
     switch(output) {
-        case "json" || "sarif":
+        case "json":
+        case "sarif":
             reportExt = ".json";
             break;
         case "csv":
@@ -47,6 +50,13 @@ export async function run(): Promise<void> {
     let roxctl = await io.which("roxctl", false);
     if (roxctl === "") {
         core.error(`roxctl not installed, please install roxctl`);
+        const binary: FindBinaryStatus = await Installer.install("latest", runnerOS);
+        if (binary.found === false) {
+            throw new Error("Error installing");
+        }
+        roxctl = binary.path;
+        core.debug("Installed roxctl");
+
     }
     core.debug(`Runner OS: ${runnerOS}`)
     const imageCheckCmd = [
