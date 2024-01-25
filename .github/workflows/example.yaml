@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: rprakashg-redhat/setup-roxctl@main
-        id: setup-roxctl
+      - id: setup-roxctl
+        uses: rprakashg-redhat/setup-roxctl@main
       - name: image scan
         uses: ./
         with:
@@ -17,4 +17,4 @@ jobs:
           output: table
           output-path: ${{ runner.temp }}
         env:
-          PATH: "$PATH:${{ setup-roxctl.outputs.destination }}"
+          PATH: "$PATH:${{ steps.setup-roxctl.outputs.destination }}"
