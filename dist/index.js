@@ -10925,7 +10925,7 @@ async function run() {
     process.env.ROX_API_TOKEN = apiToken;
     let roxctl = await io.which("roxctl", false);
     if (roxctl === "") {
-        core.setFailed(`roxctl not installed, installing latest version of roxctl`);
+        core.setFailed(`roxctl not installed, please install roxctl and try again`);
     }
     core.debug(`roxctl: ${roxctl}`);
     core.debug(`Runner OS: ${runnerOS}`);
