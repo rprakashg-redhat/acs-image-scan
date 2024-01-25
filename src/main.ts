@@ -58,6 +58,7 @@ export async function run(): Promise<void> {
         core.debug("Installed roxctl");
 
     }
+    core.debug(`roxctl: ${roxctl}`)
     core.debug(`Runner OS: ${runnerOS}`)
     const imageCheckCmd = [
         "image scan --output json --insecure-skip-tls-verify",
