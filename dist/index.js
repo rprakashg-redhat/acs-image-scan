@@ -10923,7 +10923,10 @@ async function run() {
     const scanReport = external_path_.join(outputPath, reportName);
     //set rox api token environment variable
     process.env.ROX_API_TOKEN = apiToken;
-    const roxctl = "roxctl";
+    let roxctl = await io.which("roxctl", false);
+    if (roxctl == "") {
+        roxctl = "./roxctl";
+    }
     core.debug(`Path: ${process.env.PATH}`);
     core.debug(`Runner OS: ${runnerOS}`);
     const imageCheckCmd = [
