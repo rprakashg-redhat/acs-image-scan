@@ -1,0 +1,28 @@
+name: acs-image-scan
+description: Run a container image vulnerability scan
+author: 'Ram Gopinathan'
+branding:
+  icon: circle
+  color: red
+inputs:
+  central:
+    description: central endpoint
+    required: true
+  api-token:
+    description: api token to talk to central
+    required: true
+  image:
+    description: container image to scan for vulnerabilities
+    required: true
+  output:
+    description: output format (table | csv | json | sarif )
+    default: json
+  output-path:
+    description: directory where output file should be created.
+    required: true
+outputs:
+  pass:
+    description: Image scan completed successfully with no critical/high vulnerabilities
+runs:
+  using: 'node16'
+  main: 'dist/index.js'  

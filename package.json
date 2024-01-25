@@ -1,0 +1,39 @@
+{
+    "name": "acs-image-scan",
+    "displayName": "Setup roxctl cli",
+    "description": "Download and install roxctl cli",
+    "main": "dist/index.js",
+    "scripts": {
+        "compile": "tsc -p .",
+        "bundle": "ncc build src/main.ts --source-map --minify",
+        "clean": "rm -rf lib/ dist/",
+        "lint": "eslint . --max-warnings=0",
+        "generate": "npx action-io-generator --actionYml ./action.yaml --outFile ./src/generated/inputs-outputs.ts"
+    },
+    "keywords": [],
+    "author": "Ram Gopinathan",
+    "license": "MIT",
+    "dependencies": {
+        "@actions/artifact": "^1.1.0",
+        "@actions/core": "^1.8.2",
+        "@actions/exec": "^1.1.1",
+        "@actions/io": "^1.1.2",
+        "@actions/tool-cache": "^2.0.1",
+        "mz": "^2.7.0",
+        "valid-url": "^1.0.9",
+        "uuid": "^3.3.2"
+    },
+    "devDependencies": {
+        "@redhat-actions/action-io-generator": "^1.5.0",
+        "@redhat-actions/eslint-config": "^1.3.2",
+        "@redhat-actions/tsconfig": "^1.2.0",
+        "@types/mz": "^2.7.4",
+        "@types/valid-url": "^1.0.3",
+        "@typescript-eslint/eslint-plugin": "^5.27.0",
+        "@typescript-eslint/parser": "^5.27.0",
+        "@vercel/ncc": "^0.34.0",
+        "eslint": "^8.17.0",
+        "typescript": "^4.7.3",
+        "@types/uuid": "^3.4.4"
+    }
+}
