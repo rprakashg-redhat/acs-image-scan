@@ -17,4 +17,4 @@ jobs:
           output: table
           output-path: ${{ runner.temp }}
         env:
-          PATH: "$PATH:${{ steps.setup-roxctl.outputs.destination }}"
+          PATH: "${PATH}:${{ steps.setup-roxctl.outputs.destination }}"
