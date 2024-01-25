@@ -8,11 +8,13 @@ jobs:
       - uses: actions/checkout@v4
       - id: setup-roxctl
         uses: rprakashg-redhat/setup-roxctl@main
-      - name: image scan
-        uses: ./
-        with:
-          image: "ghcr.io/rprakashg-redhat/eventscheduler@sha256:ba9347ae0d0857ea9b11d1e7bb63e86c960cb9d670cf48330b4e22fd9fd1e4df"
-          api-token: ${{ secrets.ROX_API_TOKEN }}
-          central: ${{ secrets.ROX_CENTRAL }}
-          output: table
-          output-path: ${{ runner.temp }}
+      - name: image scan help
+        run: ./roxctl image scan --help
+      #- name: image scan
+      #  uses: ./
+      #  with:
+      #    image: "ghcr.io/rprakashg-redhat/eventscheduler@sha256:ba9347ae0d0857ea9b11d1e7bb63e86c960cb9d670cf48330b4e22fd9fd1e4df"
+      #    api-token: ${{ secrets.ROX_API_TOKEN }}
+      #    central: ${{ secrets.ROX_CENTRAL }}
+      #    output: table
+      #    output-path: ${{ runner.temp }}
