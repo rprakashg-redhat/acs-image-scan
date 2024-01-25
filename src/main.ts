@@ -7,8 +7,6 @@ import { UploadArtifact } from "./uploadArtifact";
 import { Inputs, Outputs } from "./generated/inputs-outputs";
 import * as fs from "mz/fs";
 import uuidV4 from 'uuid/v4'
-import { FindBinaryStatus } from "./helper";
-import { Installer } from "./installer";
 
 export async function run(): Promise<void> {
     const runnerOS = process.env.RUNNER_OS || process.platform;
@@ -49,14 +47,7 @@ export async function run(): Promise<void> {
 
     let roxctl = await io.which("roxctl", false);
     if (roxctl === "") {
-        core.debug(`roxctl not installed, installing latest version of roxctl`);
-        const binary: FindBinaryStatus = await Installer.install("latest", runnerOS);
-        if (binary.found === false) {
-            throw new Error("Error installing");
-        }
-        roxctl = binary.path;
-        core.debug("Installed roxctl");
-
+        core.setFailed(`roxctl not installed, installing latest version of roxctl`);
     }
     core.debug(`roxctl: ${roxctl}`)
     core.debug(`Runner OS: ${runnerOS}`)

@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: rprakashg-redhat/setup-roxctl@main
       - name: image scan
         uses: ./
         with:
