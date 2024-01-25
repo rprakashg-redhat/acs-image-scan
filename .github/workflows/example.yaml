@@ -7,6 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: rprakashg-redhat/setup-roxctl@main
+        id: setup-roxctl
       - name: image scan
         uses: ./
         with:
@@ -15,3 +16,5 @@ jobs:
           central: ${{ secrets.ROX_CENTRAL }}
           output: table
           output-path: ${{ runner.temp }}
+        env:
+          PATH: "$PATH:setup-roxctl.outputs.destination"
