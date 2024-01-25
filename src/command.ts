@@ -30,6 +30,7 @@ export class Command {
         }
 
         try {
+            core.debug(`Executing Binary: ${binary} with Args: ${args}`);
             const exitCode = await exec.exec(binary, args, finalExecOptions);
             if (execOptions.ignoreReturnCode !== true && exitCode !== 0) {
                 let error = `${path.basename(binary)} exited with code ${exitCode}`;

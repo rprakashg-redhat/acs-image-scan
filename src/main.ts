@@ -56,15 +56,15 @@ export async function run(): Promise<void> {
     ];
 
     // add output
-    imageCheckCmd.push("--output ")
+    imageCheckCmd.push("--output")
     imageCheckCmd.push(output);
     
     // add central URL to command
-    imageCheckCmd.push("--endpoint ");
+    imageCheckCmd.push("--endpoint");
     imageCheckCmd.push(centralUrl);
 
      //add image to run container vulnerability scanning on
-    imageCheckCmd.push("--image ");
+    imageCheckCmd.push("--image");
     imageCheckCmd.push(image);
 
     

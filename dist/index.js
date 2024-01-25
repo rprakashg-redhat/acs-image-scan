@@ -10797,6 +10797,7 @@ class Command {
             core.startGroup(groupName);
         }
         try {
+            core.debug(`Executing Binary: ${binary} with Args: ${args}`);
             const exitCode = await exec.exec(binary, args, finalExecOptions);
             if (execOptions.ignoreReturnCode !== true && exitCode !== 0) {
                 let error = `${external_path_.basename(binary)} exited with code ${exitCode}`;
@@ -10933,13 +10934,13 @@ async function run() {
         "image scan --insecure-skip-tls-verify",
     ];
     // add output
-    imageCheckCmd.push("--output ");
+    imageCheckCmd.push("--output");
     imageCheckCmd.push(output);
     // add central URL to command
-    imageCheckCmd.push("--endpoint ");
+    imageCheckCmd.push("--endpoint");
     imageCheckCmd.push(centralUrl);
     //add image to run container vulnerability scanning on
-    imageCheckCmd.push("--image ");
+    imageCheckCmd.push("--image");
     imageCheckCmd.push(image);
     core.info(`running roxctl ${imageCheckCmd.toString()}`);
     const result = await Command.execute(roxctl, imageCheckCmd);
