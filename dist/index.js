@@ -13477,7 +13477,7 @@ async function run() {
     process.env.ROX_API_TOKEN = apiToken;
     let roxctl = await io.which("roxctl", false);
     if (roxctl === "") {
-        core.error(`roxctl not installed, please install roxctl`);
+        core.debug(`roxctl not installed, installing latest version of roxctl`);
         const binary = await Installer.install("latest", runnerOS);
         if (binary.found === false) {
             throw new Error("Error installing");
