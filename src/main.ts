@@ -46,7 +46,7 @@ export async function run(): Promise<void> {
     process.env.ROX_API_TOKEN = apiToken;
 
     const roxctl = "roxctl";
-    core.debug(`Path: $PATH`);
+    core.debug(`Path: ${process.env.PATH}`);
     core.debug(`Runner OS: ${runnerOS}`)
     const imageCheckCmd = [
         "image scan --output json --insecure-skip-tls-verify",
