@@ -3,7 +3,7 @@ import * as io from "@actions/io";
 import * as ioUtil from "@actions/io/lib/io-util";
 import * as path from "path";
 import * as fs from "mz/fs";
-import uuidV4 from "uuid/v4";
+import * as uuidV4 from "uuid/v4";
 
 import { Command } from "./command";
 import { UploadArtifact } from "./uploadArtifact";

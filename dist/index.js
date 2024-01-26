@@ -10707,18 +10707,6 @@ module.exports = require("zlib");
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__nccwpck_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__nccwpck_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -10776,7 +10764,6 @@ var external_path_ = __nccwpck_require__(1017);
 var fs = __nccwpck_require__(5573);
 // EXTERNAL MODULE: ./node_modules/uuid/v4.js
 var v4 = __nccwpck_require__(824);
-var v4_default = /*#__PURE__*/__nccwpck_require__.n(v4);
 // EXTERNAL MODULE: ./node_modules/@actions/exec/lib/exec.js
 var exec = __nccwpck_require__(1514);
 ;// CONCATENATED MODULE: ./src/command.ts
@@ -10920,7 +10907,7 @@ async function run() {
         core.info(`Specified output directory path ${outputPath} doesn't exist, creating...`);
         await io.mkdirP(outputPath);
     }
-    const reportName = v4_default()() + reportExt;
+    const reportName = v4() + reportExt;
     const scanReport = external_path_.join(outputPath, reportName);
     // set rox api token environment variable
     process.env.ROX_API_TOKEN = apiToken;
