@@ -10772,6 +10772,11 @@ var io = __nccwpck_require__(7436);
 var io_util = __nccwpck_require__(1962);
 // EXTERNAL MODULE: external "path"
 var external_path_ = __nccwpck_require__(1017);
+// EXTERNAL MODULE: ./node_modules/mz/fs.js
+var fs = __nccwpck_require__(5573);
+// EXTERNAL MODULE: ./node_modules/uuid/v4.js
+var v4 = __nccwpck_require__(824);
+var v4_default = /*#__PURE__*/__nccwpck_require__.n(v4);
 // EXTERNAL MODULE: ./node_modules/@actions/exec/lib/exec.js
 var exec = __nccwpck_require__(1514);
 ;// CONCATENATED MODULE: ./src/command.ts
@@ -10877,11 +10882,6 @@ var Outputs;
     Outputs["PASS"] = "pass";
 })(Outputs || (Outputs = {}));
 
-// EXTERNAL MODULE: ./node_modules/mz/fs.js
-var fs = __nccwpck_require__(5573);
-// EXTERNAL MODULE: ./node_modules/uuid/v4.js
-var v4 = __nccwpck_require__(824);
-var v4_default = /*#__PURE__*/__nccwpck_require__.n(v4);
 ;// CONCATENATED MODULE: ./src/main.ts
 
 
@@ -10922,10 +10922,10 @@ async function run() {
     }
     const reportName = v4_default()() + reportExt;
     const scanReport = external_path_.join(outputPath, reportName);
-    //set rox api token environment variable
+    // set rox api token environment variable
     process.env.ROX_API_TOKEN = apiToken;
     let roxctl = await io.which("roxctl", false);
-    if (roxctl == "") {
+    if (roxctl === "") {
         roxctl = "./roxctl";
     }
     core.debug(`Path: ${process.env.PATH}`);
@@ -10938,10 +10938,10 @@ async function run() {
     imageScanCmd.push(`--output=${output}`);
     // add central URL to command
     imageScanCmd.push(`--endpoint=${centralUrl}`);
-    //add image to run container vulnerability scanning on
+    // add image to run container vulnerability scanning on
     imageScanCmd.push(`--image=${image}`);
-    //insecure
-    imageScanCmd.push('--insecure-skip-tls-verify');
+    // insecure
+    imageScanCmd.push("--insecure-skip-tls-verify");
     const result = await Command.execute(roxctl, imageScanCmd);
     if (result.exitCode !== 0) {
         core.setOutput(Outputs.PASS, false);
@@ -10949,7 +10949,7 @@ async function run() {
     // save the command output to an output file
     await fs.writeFile(scanReport, result.output, "utf-8");
     // add upload the output as artifact
-    UploadArtifact.upload(reportName, [scanReport]);
+    await UploadArtifact.upload(reportName, [scanReport]);
     // set output
     core.setOutput(Outputs.PASS, true);
 }
