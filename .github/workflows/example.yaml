@@ -16,5 +16,5 @@ jobs:
           image: "ghcr.io/rprakashg-redhat/eventscheduler@sha256:ba9347ae0d0857ea9b11d1e7bb63e86c960cb9d670cf48330b4e22fd9fd1e4df"
           api-token: ${{ secrets.ROX_API_TOKEN }}
           central: ${{ secrets.ROX_CENTRAL }}
-          output: table
+          output: json
           output-path: ${{ runner.temp }}
