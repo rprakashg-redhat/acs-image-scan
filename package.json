@@ -1,7 +1,7 @@
 {
     "name": "acs-image-scan",
-    "displayName": "Setup roxctl cli",
-    "description": "Download and install roxctl cli",
+    "displayName": "RHACS Image scan",
+    "description": "Run container vulnerability scanning on a container image using RHACS",
     "main": "dist/index.js",
     "scripts": {
         "compile": "tsc -p .",
