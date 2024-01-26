@@ -10920,7 +10920,7 @@ async function run() {
         core.info(`Specified output directory path ${outputPath} doesn't exist, creating...`);
         await io.mkdirP(outputPath);
     }
-    const reportName = external_path_.join(image, v4_default()(), reportExt);
+    const reportName = v4_default()() + reportExt;
     const scanReport = external_path_.join(outputPath, reportName);
     //set rox api token environment variable
     process.env.ROX_API_TOKEN = apiToken;
@@ -10940,6 +10940,8 @@ async function run() {
     imageScanCmd.push(`--endpoint=${centralUrl}`);
     //add image to run container vulnerability scanning on
     imageScanCmd.push(`--image=${image}`);
+    //insecure
+    imageScanCmd.push('--insecure-skip-tls-verify');
     const result = await Command.execute(roxctl, imageScanCmd);
     if (result.exitCode !== 0) {
         core.setOutput(Outputs.PASS, false);

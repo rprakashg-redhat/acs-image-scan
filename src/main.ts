@@ -39,7 +39,7 @@ export async function run(): Promise<void> {
         await io.mkdirP(outputPath);
     }
     
-    const reportName = path.join(image, uuidV4(), reportExt);
+    const reportName = uuidV4() + reportExt;
     const scanReport = path.join(outputPath, reportName)
 
     //set rox api token environment variable
@@ -64,6 +64,9 @@ export async function run(): Promise<void> {
 
     //add image to run container vulnerability scanning on
     imageScanCmd.push(`--image=${image}`);
+
+    //insecure
+    imageScanCmd.push('--insecure-skip-tls-verify');
 
     const result = await Command.execute(roxctl, imageScanCmd);
     if (result.exitCode !== 0) {
