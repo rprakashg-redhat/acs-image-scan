@@ -52,24 +52,19 @@ export async function run(): Promise<void> {
     core.debug(`Path: ${process.env.PATH}`);
     core.debug(`Runner OS: ${runnerOS}`)
     const imageScanCmd = [
-        "image scan",
-        "--insecure-skip-tls-verify"
+        "image",
+        "scan",
     ];
 
     // add output
-    imageScanCmd.push("--output")
-    imageScanCmd.push(output);
+    imageScanCmd.push(`--output=${output}`)
     
     // add central URL to command
-    imageScanCmd.push("--endpoint");
-    imageScanCmd.push(centralUrl);
+    imageScanCmd.push(`--endpoint=${centralUrl}`);
 
     //add image to run container vulnerability scanning on
-    imageScanCmd.push("--image");
-    imageScanCmd.push(image);
+    imageScanCmd.push(`--image=${image}`);
 
-    
-    core.info(`running roxctl ${imageScanCmd.toString()}`);
     const result = await Command.execute(roxctl, imageScanCmd);
     if (result.exitCode !== 0) {
         core.setOutput(Outputs.PASS, false);
